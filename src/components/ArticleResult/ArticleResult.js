@@ -1,13 +1,13 @@
 import React from "react";
 
-const ArticleResult = result => {
+const ArticleResult = ({ article }) => {
   return (
     <article className="news-article">
-      <img src={result.urlToImage} alt="Article illustration"></img>
-      <a href={result.url}>
-        <h2>{result.title}</h2>
+      <img src={article.urlToImage} alt="Article illustration"></img>
+      <a href={article.url}>
+        <h2>{article.title}</h2>
       </a>
-      <p>{result.description}</p>
+      <p>{article.description}</p>
     </article>
   );
 };
