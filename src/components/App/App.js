@@ -20,7 +20,7 @@ function App() {
         .catch(err => setErrors(err));
     }
     fetchNews();
-  });
+  }, [query]);
 
   const handleSubmit = event => {
     event.preventDefault();
