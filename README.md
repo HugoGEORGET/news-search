@@ -2,7 +2,7 @@
 
 Search the freshest news from the [News API](https://newsapi.org/) !
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created with [Create React App](https://github.com/facebook/create-react-app) and uses [React-Bootstrap](https://react-bootstrap.netlify.com) for the layout.
 
 ## Run locally
 

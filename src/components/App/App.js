@@ -13,19 +13,20 @@ function App() {
   const [hasError, setErrors] = useState(false);
   const [newsResults, setNewsResults] = useState({});
 
+  async function fetchNews(query) {
+    const result = await fetch(
+      "https://newsapi.org/v2/everything?q=" +
+        query +
+        "&sortBy=popularity&apiKey=803fdd9b8517490d89d8c85ade466b8d"
+    );
+    result
+      .json()
+      .then(result => setNewsResults(result))
+      .catch(err => setErrors(err));
+  }
+
   useEffect(() => {
-    async function fetchNews() {
-      const result = await fetch(
-        "https://newsapi.org/v2/everything?q=" +
-          query +
-          "&sortBy=popularity&apiKey=803fdd9b8517490d89d8c85ade466b8d"
-      );
-      result
-        .json()
-        .then(result => setNewsResults(result))
-        .catch(err => setErrors(err));
-    }
-    fetchNews();
+    fetchNews(query);
   }, [query]);
 
   return (
@@ -48,8 +49,8 @@ function App() {
           ) : (
             newsResults.articles && (
               <CardDeck>
-                {newsResults.articles.map(article => (
-                  <ArticleResult article={article} />
+                {newsResults.articles.map((article, index) => (
+                  <ArticleResult article={article} key={index} />
                 ))}
               </CardDeck>
             )
