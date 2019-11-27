@@ -1,4 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import CardDeck from "react-bootstrap/CardDeck";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import FormControl from "react-bootstrap/FormControl";
+import Navbar from "react-bootstrap/Navbar";
 import ArticleResult from "../ArticleResult/ArticleResult";
 import "./App.css";
 
@@ -22,31 +28,34 @@ function App() {
     fetchNews();
   }, [query]);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    setQuery(query);
-  };
-
   return (
     <div className="App">
-      <form onSubmit={handleSubmit}>
-        <input
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-          type="text"
-        />
-      </form>
-      {hasError ? (
-        <span>Error : {JSON.stringify(hasError)}</span>
-      ) : (
-        newsResults.articles && (
-          <>
-            {newsResults.articles.map(article => (
-              <ArticleResult article={article} />
-            ))}
-          </>
-        )
-      )}
+      <Navbar className="justify-content-between">
+        <Navbar.Brand className="text-light">News search</Navbar.Brand>
+        <Form inline>
+          <FormControl
+            type="text"
+            placeholder="Search here..."
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+          />
+        </Form>
+      </Navbar>
+      <Container fluid>
+        <Row>
+          {hasError ? (
+            <span>Error : {JSON.stringify(hasError)}</span>
+          ) : (
+            newsResults.articles && (
+              <CardDeck>
+                {newsResults.articles.map(article => (
+                  <ArticleResult article={article} />
+                ))}
+              </CardDeck>
+            )
+          )}
+        </Row>
+      </Container>
     </div>
   );
 }
