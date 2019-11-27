@@ -33,9 +33,10 @@ function App() {
     <div className="App">
       <Navbar className="justify-content-between">
         <Navbar.Brand className="text-light">News search</Navbar.Brand>
-        <Form inline>
+        <Form inline className="w-25">
           <FormControl
             type="text"
+            className="w-100"
             placeholder="Search here..."
             value={query}
             onChange={e => setQuery(e.target.value)}
