@@ -16,28 +16,29 @@ function App() {
     <Router>
       <ScrollToTop />
       <div className="App">
-        <Navbar className="justify-content-between">
-          <Navbar.Brand className="text-light">News search</Navbar.Brand>
+        <Navbar expand="md" className="justify-content-between">
+          <Navbar.Brand>
+            <Link to="/" className="text-decoration-none text-light">
+              News search
+            </Link>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-navigation" />
           <Navbar.Collapse id="navbar-navigation">
-            <Nav>
-              <Nav.Link>
-                <Link to="/">Home</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/top-news">Top news</Link>
+            <Nav className="mr-auto">
+              <Nav.Link href="/top-news" className="text-light">
+                Top news
               </Nav.Link>
             </Nav>
+            <Form inline>
+              <FormControl
+                type="text"
+                className="w-100"
+                placeholder="Search here..."
+                value={query}
+                onChange={e => setQuery(e.target.value)}
+              />
+            </Form>
           </Navbar.Collapse>
-          <Form inline className="w-25">
-            <FormControl
-              type="text"
-              className="w-100"
-              placeholder="Search here..."
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-            />
-          </Form>
         </Navbar>
         <Switch>
           <Route exact path="/">
