@@ -26,7 +26,7 @@ function NewsSearch(props) {
         query +
         "&page=" +
         page +
-        "&sortBy=popularity&apiKey=803fdd9b8517490d89d8c85ade466b8d"
+        "&apiKey=803fdd9b8517490d89d8c85ade466b8d"
     );
     result
       .json()
@@ -46,6 +46,9 @@ function NewsSearch(props) {
         ) : (
           newsResults.articles && (
             <>
+              <h1 className="mb-3">
+                Freshest news for your query : {props.query}
+              </h1>
               <CardDeck>
                 {newsResults.articles.map((article, index) => (
                   <ArticleResult article={article} key={index} />
