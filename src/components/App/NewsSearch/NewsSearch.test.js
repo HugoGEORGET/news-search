@@ -17,7 +17,8 @@ afterEach(() => {
   container = null;
 });
 
-it("renders news search", async () => {
+it("renders multiple articles in news search", async () => {
+  // No pun intended...
   const fakeNews = {
     status: "ok",
     totalResults: 32,
@@ -63,6 +64,9 @@ it("renders news search", async () => {
   });
 
   expect(container.textContent).toContain(fakeNews.articles[0].title);
+  expect(container.textContent).toContain(fakeNews.articles[0].description);
+  expect(container.textContent).toContain(fakeNews.articles[1].title);
+  expect(container.textContent).toContain(fakeNews.articles[1].description);
 
   // remove the mock to ensure tests are completely isolated
   global.fetch.mockRestore();

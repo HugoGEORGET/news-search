@@ -21,7 +21,7 @@ function NewsSearch(props) {
     window.scrollTo(0, 0);
   }, [page]);
 
-  async function fetchEverything(query, page) {
+  async function fetchAllNews(query, page) {
     const result = await fetch(
       "https://newsapi.org/v2/everything?q=" +
         query +
@@ -38,7 +38,7 @@ function NewsSearch(props) {
   }
 
   useEffect(() => {
-    fetchEverything(props.query, page);
+    fetchAllNews(props.query, page);
   }, [props.query, page]);
 
   if (!newsResults && !hasError) {
