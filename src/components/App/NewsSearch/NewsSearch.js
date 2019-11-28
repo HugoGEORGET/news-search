@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
 import Pagination from "react-bootstrap/Pagination";
 import Row from "react-bootstrap/Row";
-import ArticleResult from "../ArticleResult/ArticleResult";
+import Spinner from "react-bootstrap/Spinner";
+import ArticleResult from "../../ArticleResult/ArticleResult";
 
 function NewsSearch(props) {
   const [page, setPage] = useState(1);
@@ -30,13 +31,19 @@ function NewsSearch(props) {
     );
     result
       .json()
-      .then(result => setNewsResults(result))
+      .then(result => {
+        setNewsResults(result);
+      })
       .catch(err => setErrors(err));
   }
 
   useEffect(() => {
     fetchEverything(props.query, page);
   }, [props.query, page]);
+
+  if (!newsResults && !hasError) {
+    return <Spinner animation="grow" />;
+  }
 
   return (
     <Container fluid>

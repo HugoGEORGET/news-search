@@ -1,11 +1,12 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import CardDeck from "react-bootstrap/CardDeck";
 import Container from "react-bootstrap/Container";
-import Pagination from "react-bootstrap/Pagination";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import Row from "react-bootstrap/Row";
-import ArticleResult from "../ArticleResult/ArticleResult";
 import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
+import Pagination from "react-bootstrap/Pagination";
+import Row from "react-bootstrap/Row";
+import Spinner from "react-bootstrap/Spinner";
+import ArticleResult from "../../ArticleResult/ArticleResult";
 
 function TopNews(props) {
   // Countries are hard-coded.
@@ -103,6 +104,10 @@ function TopNews(props) {
   useEffect(() => {
     fetchTopNews(props.query, country, page);
   }, [props.query, country, page]);
+
+  if (!newsResults && !hasError) {
+    return <Spinner animation="grow" />;
+  }
 
   return (
     <Container fluid>

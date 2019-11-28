@@ -4,17 +4,15 @@ import FormControl from "react-bootstrap/FormControl";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import NewsSearch from "../NewsSearch/NewsSearch";
-import TopNews from "../TopNews/TopNews";
-import ScrollToTop from "./ScrollToTop";
 import "./App.css";
+import NewsSearch from "./NewsSearch/NewsSearch";
+import TopNews from "./TopNews/TopNews";
 
 function App() {
   const [query, setQuery] = useState("");
 
   return (
     <Router>
-      <ScrollToTop />
       <div className="App">
         <Navbar expand="md" className="justify-content-between">
           <Navbar.Brand>
