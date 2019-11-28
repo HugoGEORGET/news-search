@@ -1,64 +1,52 @@
-import React, { useEffect, useState } from "react";
-import CardDeck from "react-bootstrap/CardDeck";
-import Container from "react-bootstrap/Container";
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import FormControl from "react-bootstrap/FormControl";
+import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import ArticleResult from "../ArticleResult/ArticleResult";
+import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import NewsSearch from "../NewsSearch/NewsSearch";
+import TopNews from "../TopNews/TopNews";
 import "./App.css";
 
 function App() {
   const [query, setQuery] = useState("");
-  const [hasError, setErrors] = useState(false);
-  const [newsResults, setNewsResults] = useState({});
-
-  async function fetchNews(query) {
-    const result = await fetch(
-      "https://newsapi.org/v2/everything?q=" +
-        query +
-        "&sortBy=popularity&apiKey=803fdd9b8517490d89d8c85ade466b8d"
-    );
-    result
-      .json()
-      .then(result => setNewsResults(result))
-      .catch(err => setErrors(err));
-  }
-
-  useEffect(() => {
-    fetchNews(query);
-  }, [query]);
 
   return (
-    <div className="App">
-      <Navbar className="justify-content-between">
-        <Navbar.Brand className="text-light">News search</Navbar.Brand>
-        <Form inline className="w-25">
-          <FormControl
-            type="text"
-            className="w-100"
-            placeholder="Search here..."
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-          />
-        </Form>
-      </Navbar>
-      <Container fluid>
-        <Row>
-          {hasError ? (
-            <span>Error : {JSON.stringify(hasError)}</span>
-          ) : (
-            newsResults.articles && (
-              <CardDeck>
-                {newsResults.articles.map((article, index) => (
-                  <ArticleResult article={article} key={index} />
-                ))}
-              </CardDeck>
-            )
-          )}
-        </Row>
-      </Container>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar className="justify-content-between">
+          <Navbar.Brand className="text-light">News search</Navbar.Brand>
+          <Navbar.Toggle aria-controls="navbar-navigation" />
+          <Navbar.Collapse id="navbar-navigation">
+            <Nav>
+              <Nav.Link>
+                <Link to="/">Home</Link>
+              </Nav.Link>
+              <Nav.Link>
+                <Link to="/top-news">Top news</Link>
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+          <Form inline className="w-25">
+            <FormControl
+              type="text"
+              className="w-100"
+              placeholder="Search here..."
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+            />
+          </Form>
+        </Navbar>
+        <Switch>
+          <Route exact path="/">
+            <NewsSearch query={query} />
+          </Route>
+          <Route path="/top-news">
+            <TopNews query={query} />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

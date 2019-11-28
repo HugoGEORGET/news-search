@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
@@ -20,7 +20,7 @@ const ArticleResult = ({ article }) => {
           </Card.Title>
           <Card.Text className="text-body">{article.description}</Card.Text>
         </Card.Body>
-        <Card.Footer className="d-flex justify-content-between">
+        <Card.Footer className="d-flex align-items-center justify-content-between">
           <small className="text-muted">{articleDate.toDateString()}</small>
           <Button variant="outline-secondary" onClick={hideArticle}>
             Hide Article
