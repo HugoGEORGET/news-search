@@ -11,7 +11,7 @@ const ArticleResult = ({ article }) => {
   }, []);
 
   return (
-    <Col sm={12} md={4} className={"mb-4 " + (hidden ? "d-none" : "")}>
+    <Col sm={12} md={3} className={"mb-4 " + (hidden ? "d-none" : "")}>
       <Card className="h-100">
         <Card.Img variant="top" src={article.urlToImage} />
         <Card.Body>

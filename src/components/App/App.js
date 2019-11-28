@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import NewsSearch from "../NewsSearch/NewsSearch";
 import TopNews from "../TopNews/TopNews";
+import ScrollToTop from "./ScrollToTop";
 import "./App.css";
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
 
   return (
     <Router>
+      <ScrollToTop />
       <div className="App">
         <Navbar className="justify-content-between">
           <Navbar.Brand className="text-light">News search</Navbar.Brand>
