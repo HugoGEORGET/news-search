@@ -6,7 +6,7 @@ import DropdownButton from "react-bootstrap/DropdownButton";
 import Pagination from "react-bootstrap/Pagination";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
-import ArticleResult from "../../ArticleResult/ArticleResult";
+import ArticleResult from "../ArticleResult/ArticleResult";
 
 function TopNews(props) {
   // Countries are hard-coded.

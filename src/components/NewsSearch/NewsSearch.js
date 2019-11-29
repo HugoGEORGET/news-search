@@ -4,7 +4,7 @@ import Container from "react-bootstrap/Container";
 import Pagination from "react-bootstrap/Pagination";
 import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
-import ArticleResult from "../../ArticleResult/ArticleResult";
+import ArticleResult from "../ArticleResult/ArticleResult";
 
 function NewsSearch(props) {
   const [page, setPage] = useState(1);

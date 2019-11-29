@@ -5,8 +5,8 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import "./App.css";
-import NewsSearch from "./NewsSearch/NewsSearch";
-import TopNews from "./TopNews/TopNews";
+import NewsSearch from "../NewsSearch/NewsSearch";
+import TopNews from "../TopNews/TopNews";
 
 function App() {
   const [query, setQuery] = useState("");
