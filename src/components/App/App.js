@@ -27,7 +27,12 @@ function App() {
                 Top news
               </Nav.Link>
             </Nav>
-            <Form inline>
+            <Form
+              inline
+              onSubmit={e => {
+                e.preventDefault();
+              }}
+            >
               <FormControl
                 type="text"
                 className="w-100"
