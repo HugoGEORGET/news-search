@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
 import "./App.css";
 import NewsSearch from "../NewsSearch/NewsSearch";
 import TopNews from "../TopNews/TopNews";
@@ -16,16 +16,22 @@ function App() {
       <div className="App">
         <Navbar expand="md" className="justify-content-between">
           <Navbar.Brand>
-            <Link to="/" className="text-decoration-none text-light">
+            <Link
+              to={process.env.PUBLIC_URL + "/"}
+              className="text-decoration-none text-light"
+            >
               News search
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-navigation" />
           <Navbar.Collapse id="navbar-navigation">
             <Nav className="mr-auto">
-              <Nav.Link href="/top-news" className="text-light">
+              <Link
+                to={process.env.PUBLIC_URL + "/top-news"}
+                className="text-light"
+              >
                 Top news
-              </Nav.Link>
+              </Link>
             </Nav>
             <Form
               inline
@@ -44,10 +50,10 @@ function App() {
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={process.env.PUBLIC_URL + "/"}>
             <NewsSearch query={query} />
           </Route>
-          <Route path="/top-news">
+          <Route path={process.env.PUBLIC_URL + "/top-news"}>
             <TopNews query={query} />
           </Route>
         </Switch>

@@ -1,6 +1,6 @@
 {
   "name": "news-search",
-  "homepage": "https://hugogeorget.github.io/news-search",
+  "homepage": "https://hugogeorget.github.io/news-search/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
