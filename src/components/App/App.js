@@ -4,9 +4,9 @@ import FormControl from "react-bootstrap/FormControl";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
-import "./App.css";
 import NewsSearch from "../NewsSearch/NewsSearch";
 import TopNews from "../TopNews/TopNews";
+import "./App.css";
 
 function App() {
   const [query, setQuery] = useState("");

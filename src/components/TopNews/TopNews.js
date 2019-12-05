@@ -74,6 +74,7 @@ function TopNews(props) {
   const [page, setPage] = useState(1);
   const [hasError, setErrors] = useState(false);
   const [newsResults, setNewsResults] = useState({});
+  const [topNewsSort, setTopNewsSort] = useState("Latest");
 
   const nextPage = useCallback(() => {
     setPage(page + 1);
@@ -84,6 +85,30 @@ function TopNews(props) {
     setPage(page - 1);
     window.scrollTo(0, 0);
   }, [page]);
+
+  const isArticleEarlier = (article1, article2) => {
+    if (Date.parse(article1.publishedAt) < Date.parse(article2.publishedAt)) {
+      return -1;
+    }
+
+    if (Date.parse(article1.publishedAt) > Date.parse(article2.publishedAt)) {
+      return 1;
+    }
+
+    return 0;
+  };
+
+  const isArticleLater = (article1, article2) => {
+    if (Date.parse(article1.publishedAt) < Date.parse(article2.publishedAt)) {
+      return 1;
+    }
+
+    if (Date.parse(article1.publishedAt) > Date.parse(article2.publishedAt)) {
+      return -1;
+    }
+
+    return 0;
+  };
 
   async function fetchTopNews(query, country, page) {
     const result = await fetch(
@@ -118,16 +143,37 @@ function TopNews(props) {
           newsResults.articles && (
             <>
               <h1 className="mb-3 d-flex">
-                <span className="mr-3">Top news for </span>
+                <DropdownButton
+                  size="lg"
+                  variant="outline-light"
+                  title={topNewsSort}
+                  className="d-flex mr-3"
+                >
+                  <Dropdown.Item
+                    eventKey={"Latest"}
+                    onClick={() => setTopNewsSort("Latest")}
+                  >
+                    Latest
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    eventKey={"Earlier"}
+                    onClick={() => setTopNewsSort("Earlier")}
+                  >
+                    Earlier
+                  </Dropdown.Item>
+                </DropdownButton>
+                <span className="mr-3">top news for </span>
                 {
                   <DropdownButton
                     variant="outline-light"
+                    size="lg"
                     title={country.toUpperCase()}
                     className="d-flex"
                   >
                     {countries.map((country, index) => (
                       <Dropdown.Item
                         eventKey={index}
+                        key={index}
                         onClick={() => setCountry(country)}
                       >
                         {country.toUpperCase()}
@@ -140,9 +186,17 @@ function TopNews(props) {
                 )}
               </h1>
               <CardDeck>
-                {newsResults.articles.map((article, index) => (
-                  <ArticleResult article={article} key={index} />
-                ))}
+                {topNewsSort === "Earlier"
+                  ? newsResults.articles
+                      .sort(isArticleEarlier)
+                      .map((article, index) => (
+                        <ArticleResult article={article} key={index} />
+                      ))
+                  : newsResults.articles
+                      .sort(isArticleLater)
+                      .map((article, index) => (
+                        <ArticleResult article={article} key={index} />
+                      ))}
               </CardDeck>
               <Pagination>
                 {page > 1 && <Pagination.Prev onClick={previousPage} />}

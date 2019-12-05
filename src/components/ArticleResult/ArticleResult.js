@@ -21,7 +21,7 @@ const ArticleResult = ({ article }) => {
           <Card.Text className="text-body">{article.description}</Card.Text>
         </Card.Body>
         <Card.Footer className="d-flex align-items-center justify-content-between">
-          <small className="text-muted">{articleDate.toDateString()}</small>
+          <small className="w-50 text-muted">{articleDate.toString()}</small>
           <Button variant="outline-secondary" onClick={hideArticle}>
             Hide Article
           </Button>
