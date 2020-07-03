@@ -51,24 +51,24 @@ function NewsSearch(props) {
       <Row className="justify-content-center">
         {hasError ? (
           <span>Error : {JSON.stringify(hasError)}</span>
+        ) : newsResults.articles ? (
+          <>
+            <h1 className="mb-3">
+              Freshest news for your query : {props.query}
+            </h1>
+            <CardDeck>
+              {newsResults.articles.map((article, index) => (
+                <ArticleResult article={article} key={index} />
+              ))}
+            </CardDeck>
+            <Pagination>
+              {page > 1 && <Pagination.Prev onClick={previousPage} />}
+              <Pagination.Item disabled>Page {page}</Pagination.Item>
+              <Pagination.Next onClick={nextPage} />
+            </Pagination>
+          </>
         ) : (
-          newsResults.articles && (
-            <>
-              <h1 className="mb-3">
-                Freshest news for your query : {props.query}
-              </h1>
-              <CardDeck>
-                {newsResults.articles.map((article, index) => (
-                  <ArticleResult article={article} key={index} />
-                ))}
-              </CardDeck>
-              <Pagination>
-                {page > 1 && <Pagination.Prev onClick={previousPage} />}
-                <Pagination.Item disabled>Page {page}</Pagination.Item>
-                <Pagination.Next onClick={nextPage} />
-              </Pagination>
-            </>
-          )
+          <h1>Use the search bar to find news !</h1>
         )}
       </Row>
     </Container>
