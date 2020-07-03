@@ -22,8 +22,9 @@ function NewsSearch(props) {
   }, [page]);
 
   async function fetchAllNews(query, page) {
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     const result = await fetch(
-      `https://newsapi.org/v2/everything?q=${query}&page=${page}`,
+      `${proxyUrl}https://newsapi.org/v2/everything?q=${query}&page=${page}`,
       {
         headers: {
           "X-Api-Key": process.env.REACT_APP_NEWS_API_KEY,
