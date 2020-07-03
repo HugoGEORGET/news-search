@@ -112,14 +112,12 @@ function TopNews(props) {
 
   async function fetchTopNews(query, country, page) {
     const result = await fetch(
-      "https://newsapi.org/v2/top-headlines?q=" +
-        query +
-        "&country=" +
-        country +
-        "&page=" +
-        page +
-        "&apiKey=" +
-        process.env.REACT_APP_NEWS_API_KEY
+      `https://newsapi.org/v2/top-headlines?q=${query}&country=${country}&page=${page}`,
+      {
+        headers: {
+          "X-Api-Key": process.env.REACT_APP_NEWS_API_KEY,
+        },
+      }
     );
     result
       .json()

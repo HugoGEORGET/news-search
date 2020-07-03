@@ -23,12 +23,12 @@ function NewsSearch(props) {
 
   async function fetchAllNews(query, page) {
     const result = await fetch(
-      "https://newsapi.org/v2/everything?q=" +
-        query +
-        "&page=" +
-        page +
-        "&apiKey=" +
-        process.env.REACT_APP_NEWS_API_KEY
+      `https://newsapi.org/v2/everything?q=${query}&page=${page}`,
+      {
+        headers: {
+          "X-Api-Key": process.env.REACT_APP_NEWS_API_KEY,
+        },
+      }
     );
     result
       .json()
