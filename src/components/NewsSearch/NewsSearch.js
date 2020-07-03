@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import ArticleResult from "../ArticleResult/ArticleResult";
 
-function NewsSearch(props) {
+const NewsSearch = ({ query }) => {
   const [page, setPage] = useState(1);
   const [hasError, setErrors] = useState(false);
   const [newsResults, setNewsResults] = useState({});
@@ -40,10 +40,10 @@ function NewsSearch(props) {
   }
 
   useEffect(() => {
-    if (props.query) {
-      fetchAllNews(props.query, page);
+    if (query) {
+      fetchAllNews(query, page);
     }
-  }, [props.query, page]);
+  }, [query, page]);
 
   if (!newsResults && !hasError) {
     return <Spinner animation="grow" />;
@@ -56,9 +56,7 @@ function NewsSearch(props) {
           <span>Error : {JSON.stringify(hasError)}</span>
         ) : newsResults.articles ? (
           <>
-            <h1 className="mb-3">
-              Freshest news for your query : {props.query}
-            </h1>
+            <h1 className="mb-3">Freshest news for your query : {query}</h1>
             <CardDeck>
               {newsResults.articles.map((article, index) => (
                 <ArticleResult article={article} key={index} />
@@ -76,6 +74,6 @@ function NewsSearch(props) {
       </Row>
     </Container>
   );
-}
+};
 
 export default NewsSearch;

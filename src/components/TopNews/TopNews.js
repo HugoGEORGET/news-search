@@ -8,9 +8,9 @@ import Row from "react-bootstrap/Row";
 import Spinner from "react-bootstrap/Spinner";
 import ArticleResult from "../ArticleResult/ArticleResult";
 
-function TopNews(props) {
+const TopNews = ({ query }) => {
   // Countries are hard-coded.
-  // One way to programatically get those would be to use the News API /sources endpoint and parsing the result.abs
+  // One way to programatically get those would be to use the News API /sources endpoint and parsing the result.
   // But I'm lazy 😪
   const countries = [
     "all",
@@ -86,29 +86,11 @@ function TopNews(props) {
     window.scrollTo(0, 0);
   }, [page]);
 
-  const isArticleEarlier = (article1, article2) => {
-    if (Date.parse(article1.publishedAt) < Date.parse(article2.publishedAt)) {
-      return -1;
-    }
+  const isArticleEarlier = (article1, article2) =>
+    Date.parse(article1.publishedAt) - Date.parse(article2.publishedAt);
 
-    if (Date.parse(article1.publishedAt) > Date.parse(article2.publishedAt)) {
-      return 1;
-    }
-
-    return 0;
-  };
-
-  const isArticleLater = (article1, article2) => {
-    if (Date.parse(article1.publishedAt) < Date.parse(article2.publishedAt)) {
-      return 1;
-    }
-
-    if (Date.parse(article1.publishedAt) > Date.parse(article2.publishedAt)) {
-      return -1;
-    }
-
-    return 0;
-  };
+  const isArticleLater = (article1, article2) =>
+    Date.parse(article2.publishedAt) - Date.parse(article1.publishedAt);
 
   async function fetchTopNews(query, country, page) {
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
@@ -127,8 +109,8 @@ function TopNews(props) {
   }
 
   useEffect(() => {
-    fetchTopNews(props.query, country, page);
-  }, [props.query, country, page]);
+    fetchTopNews(query, country, page);
+  }, [query, country, page]);
 
   if (!newsResults && !hasError) {
     return <Spinner animation="grow" />;
@@ -181,9 +163,7 @@ function TopNews(props) {
                     ))}
                   </DropdownButton>
                 }
-                {props.query && (
-                  <span className="ml-3">and query : {props.query}</span>
-                )}
+                {query && <span className="ml-3">and query : {query}</span>}
               </h1>
               <CardDeck>
                 {topNewsSort === "Earlier"
@@ -209,6 +189,6 @@ function TopNews(props) {
       </Row>
     </Container>
   );
-}
+};
 
 export default TopNews;
