@@ -67,7 +67,7 @@ function TopNews(props) {
     "ua",
     "us",
     "ve",
-    "za"
+    "za",
   ];
 
   const [country, setCountry] = useState("us");
@@ -118,12 +118,13 @@ function TopNews(props) {
         country +
         "&page=" +
         page +
-        "&apiKey=803fdd9b8517490d89d8c85ade466b8d"
+        "&apiKey=" +
+        process.env.REACT_APP_NEWS_API_KEY
     );
     result
       .json()
-      .then(result => setNewsResults(result))
-      .catch(err => setErrors(err));
+      .then((result) => setNewsResults(result))
+      .catch((err) => setErrors(err));
   }
 
   useEffect(() => {
