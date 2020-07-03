@@ -39,7 +39,9 @@ function NewsSearch(props) {
   }
 
   useEffect(() => {
-    fetchAllNews(props.query, page);
+    if (props.query) {
+      fetchAllNews(props.query, page);
+    }
   }, [props.query, page]);
 
   if (!newsResults && !hasError) {
