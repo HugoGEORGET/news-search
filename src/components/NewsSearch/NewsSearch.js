@@ -27,14 +27,15 @@ function NewsSearch(props) {
         query +
         "&page=" +
         page +
-        "&apiKey=803fdd9b8517490d89d8c85ade466b8d"
+        "&apiKey=" +
+        process.env.REACT_APP_NEWS_API_KEY
     );
     result
       .json()
-      .then(result => {
+      .then((result) => {
         setNewsResults(result);
       })
-      .catch(err => setErrors(err));
+      .catch((err) => setErrors(err));
   }
 
   useEffect(() => {
