@@ -17,7 +17,7 @@ afterEach(() => {
   container = null;
 });
 
-it("renders multiple articles in news search", async () => {
+it.skip("renders multiple articles in news search", async () => {
   // No pun intended...
   const fakeNews = {
     status: "ok",
