@@ -12,30 +12,24 @@ function App() {
   const [query, setQuery] = useState("");
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
         <Navbar expand="md" className="justify-content-between">
           <Navbar.Brand>
-            <Link
-              to={process.env.PUBLIC_URL + "/"}
-              className="text-decoration-none text-light"
-            >
+            <Link to="/" className="text-decoration-none text-light">
               News search
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-navigation" />
           <Navbar.Collapse id="navbar-navigation">
             <Nav className="mr-auto">
-              <Link
-                to={process.env.PUBLIC_URL + "/top-news"}
-                className="text-light"
-              >
+              <Link to="/top-news" className="text-light">
                 Top news
               </Link>
             </Nav>
             <Form
               inline
-              onSubmit={e => {
+              onSubmit={(e) => {
                 e.preventDefault();
               }}
             >
@@ -44,16 +38,16 @@ function App() {
                 className="w-100"
                 placeholder="Search here..."
                 value={query}
-                onChange={e => setQuery(e.target.value)}
+                onChange={(e) => setQuery(e.target.value)}
               />
             </Form>
           </Navbar.Collapse>
         </Navbar>
         <Switch>
-          <Route exact path={process.env.PUBLIC_URL + "/"}>
+          <Route exact path="/">
             <NewsSearch query={query} />
           </Route>
-          <Route path={process.env.PUBLIC_URL + "/top-news"}>
+          <Route path="/top-news">
             <TopNews query={query} />
           </Route>
         </Switch>
